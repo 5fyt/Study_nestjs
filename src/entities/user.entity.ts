@@ -18,7 +18,7 @@ export class User {
   username: string;
 
   @Column()
-  password: string;
+  password: number;
 
   @OneToMany(() => Logs, (log) => log.user)
   logs: Logs[];

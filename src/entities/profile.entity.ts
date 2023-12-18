@@ -9,7 +9,7 @@ import { User } from './user.entity';
 @Entity()
 export class Profile {
   @PrimaryGeneratedColumn()
-  uid: string;
+  id: string;
 
   @Column()
   gender: number;

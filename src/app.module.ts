@@ -6,7 +6,7 @@ import { ConfigEnum } from './enum/config.enum';
 import * as dotenv from 'dotenv';
 import * as Joi from 'joi';
 import { User } from './entities/user.entity';
-import { UserModule } from './user/user.module';
+import { UserModule } from './common/user/user.module';
 import { Profile } from './entities/profile.entity';
 import { Logs } from './entities/log.entity';
 import { Roles } from './entities/roles.entity';
