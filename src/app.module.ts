@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Global, Module, Logger } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
@@ -10,8 +10,12 @@ import { UserModule } from './common/user/user.module';
 import { Profile } from './entities/profile.entity';
 import { Logs } from './entities/log.entity';
 import { Roles } from './entities/roles.entity';
+
+// import { LogsModule } from './common/logs/logs.module';
+// import { LogsModule } from './common/logs/logs.module';
 const envFilePath = `.env.${process.env.NODE_ENV || `development`}`;
 
+@Global()
 @Module({
   // ConfigModule.forRoot() 可以使用env 文件中的常量
   imports: [
@@ -52,5 +56,7 @@ const envFilePath = `.env.${process.env.NODE_ENV || `development`}`;
         }) as TypeOrmModuleOptions,
     }),
   ],
+  providers: [Logger],
+  exports: [Logger],
 })
 export class AppModule {}

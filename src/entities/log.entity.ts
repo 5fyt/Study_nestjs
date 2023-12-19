@@ -6,7 +6,7 @@ export class Logs {
   id: string;
 
   @Column()
-  path: number;
+  path: string;
 
   @Column()
   method: string;

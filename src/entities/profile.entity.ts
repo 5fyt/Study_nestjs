@@ -19,8 +19,8 @@ export class Profile {
 
   @Column()
   address: string;
-
-  @OneToOne(() => User)
+  //需要添加上关联关系，不是只写(()=>User)
+  @OneToOne(() => User, (user) => user.profile)
   @JoinColumn()
   user: User;
 }
