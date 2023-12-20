@@ -11,11 +11,9 @@ import { Profile } from './entities/profile.entity';
 import { Logs } from './entities/log.entity';
 import { Roles } from './entities/roles.entity';
 
-// import { LogsModule } from './common/logs/logs.module';
-// import { LogsModule } from './common/logs/logs.module';
 const envFilePath = `.env.${process.env.NODE_ENV || `development`}`;
 
-@Global()
+@Global() //全局注册日志
 @Module({
   // ConfigModule.forRoot() 可以使用env 文件中的常量
   imports: [
@@ -56,6 +54,7 @@ const envFilePath = `.env.${process.env.NODE_ENV || `development`}`;
         }) as TypeOrmModuleOptions,
     }),
   ],
+  //可以让各个模块都应用这个日志
   providers: [Logger],
   exports: [Logger],
 })

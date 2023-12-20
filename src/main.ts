@@ -7,6 +7,7 @@ import {
   utilities as nestWinstonModuleUtilities,
 } from 'nest-winston';
 import * as winston from 'winston';
+import { ApiExceptionFilter } from './common/filters/http-exception.filter';
 async function bootstrap() {
   const instance = createLogger({
     // options of Winston
@@ -45,13 +46,16 @@ async function bootstrap() {
           winston.format.json(),
         ),
         // 日志等级，不设置所有日志将在同一个文件
-        level: 'warn',
+        level: 'error',
       }),
     ],
   });
+  const logger = WinstonModule.createLogger({ instance });
   const app = await NestFactory.create(AppModule, {
-    logger: WinstonModule.createLogger({ instance }),
+    logger,
   });
+  //全局注册请求异常拦截器
+  app.useGlobalFilters(new ApiExceptionFilter(logger));
   app.setGlobalPrefix('api/v1');
   await app.listen(9090);
 }

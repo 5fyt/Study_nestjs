@@ -13,6 +13,8 @@ export class UserController {
   }
   @Get()
   findAll() {
+    this.logger.log('请求成功');
+    this.logger.error('请求成功');
     return this.userService.findAll();
   }
   @Post()
@@ -22,7 +24,11 @@ export class UserController {
   @Get(':id')
   findOne(@Param() params: any) {
     // console.log(params.id);
-    return this.userService.findOne(params.id);
+    try {
+      return this.userService.findOne(params.id);
+    } catch {
+      throw this.logger.error('user路径错误');
+    }
   }
   @Get(':id/log')
   findOneLog(@Param() params: any) {
